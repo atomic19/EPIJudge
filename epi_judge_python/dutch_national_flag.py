@@ -23,26 +23,39 @@ def simple_dutch_flag_partition(pivot_index: int, A: List[int]) -> None:
     print('\n', A, ret)
     return ret
 
+def exact_flag_partition(pivot_index: int, A: List[int]) -> None:
+    pivot = A[pivot_index]
+    smaller, equal, larger = 0, 0, len(A)
+    while equal < larger:
+        if A[equal] < pivot:
+            A[smaller], A[equal] = A[equal], A[smaller]
+            smaller, equal = smaller + 1, equal + 1
+        elif A[equal] == pivot:
+            equal += 1
+        else:
+            larger -= 1
+            A[equal], A[larger] = A[larger], A[equal]
+
 
 def dutch_flag_partition(pivot_index: int, A: List[int]) -> None:
     #return simple_dutch_flag_partition(pivot_index, A)
-    pv = A[pivot_index]
-    eq = pivot_index
-    large = len(A) - 1
-    run = 0
-    while eq < large:
-        if run == eq:
+    #exact_flag_partition(pivot_index, A)
+    #return
+    print('\norig', A)
+    el = A[pivot_index]
+    r, eq, l = 0, 0, len(A)
+    while eq < l:
+        if A[eq] < el:
+            A[r], A[eq] = A[eq], A[r]
+            r += 1
             eq += 1
-            A[run], A[eq] = A[eq], A[run]
-        elif A[run] == pv:
+        elif A[eq] == el:
             eq += 1
-            A[run], A[eq] = A[eq], A[run]
-        elif A[run] > pv:
-            A[large], A[run] = A[run], A[large]
-            large -= 1
         else:
-            run += 1
-    return A
+            l -= 1
+            A[l], A[eq] = A[eq], A[l]
+    print('completed',A)
+    return
 
 
 @enable_executor_hook
