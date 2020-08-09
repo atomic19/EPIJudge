@@ -7,7 +7,13 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def rearrange(A: List[int]) -> None:
-    # TODO - you fill in here.
+    for idx in range(len(A)):
+        if idx % 2 == 0:
+            if idx + 1 < len(A) and A[idx] > A[idx+1]:
+                A[idx], A[idx+1] = A[idx+1], A[idx]
+        else:
+            if idx + 1 < len(A) and A[idx] < A[idx+1]:
+                A[idx], A[idx+1] = A[idx+1], A[idx]
     return
 
 
