@@ -9,7 +9,20 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def random_subset(n: int, k: int) -> List[int]:
-    # TODO - you fill in here.
+    import random
+    ot = [None for _ in range(k)]
+
+    ctr = 0
+    for i in range(n):
+        if ctr < len(ot):
+            ot[ctr] = i
+        else:
+            idx = random.randint(0, ctr)
+            if idx < k:
+                ot[idx] = i
+        ctr += 1
+
+    return ot
     return []
 
 
