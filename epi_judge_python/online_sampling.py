@@ -10,8 +10,20 @@ from test_framework.test_utils import enable_executor_hook
 
 # Assumption: there are at least k elements in the stream.
 def online_random_sample(stream: Iterator[int], k: int) -> List[int]:
-    # TODO - you fill in here.
-    return []
+    import random
+    ot = [None for _ in range(k)]
+
+    ctr = 0
+    for i in stream:
+        if ctr < len(ot):
+            ot[ctr] = i
+        else:
+            idx = random.randint(0, ctr)
+            if idx < k:
+                ot[idx] = i
+        ctr += 1
+
+    return ot
 
 
 @enable_executor_hook
